@@ -3,11 +3,11 @@ class PostsController < ApplicationController
     @posts = Post.order(id: "DESC")
   end
 
-  def new
-  end
+  # def new
+  # end
 
   def create
-    Post.create(memo: params[:memo])
-    redirect_to action: :index
+    post = Post.create(memo: params[:memo])
+    render json:{ post: post }
   end
 end
