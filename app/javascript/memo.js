@@ -21,13 +21,21 @@ function post (){
   });
 
   submit.addEventListener("click", (e) => {
+    // preventDefaultメソッドでブラウザとJavaScriptからの二重リクエストを回避
     e.preventDefault();
     const form = document.getElementById("form");
+    // FormDataオブジェクトに引数としてformを渡すことでformの中の値を取得する
     const formData = new FormData(form);
+    // JavaScriptを用いてサーバーサイドとHTTP通信でやりとりするためのXMLHttpRequestオブジェクトを生成する
     const XHR = new XMLHttpRequest();
+    // openメソッドを使いリクエスト内容を指定
     XHR.open("POST", "/posts", true);
+    // responseTypeプロパティを使いレスポンスのデータ形式を指定
     XHR.responseType = "json";
+    // sendメソッドでフォームの中身を送信
     XHR.send(formData);
+
+    // onloadプロパティでサーバーサイドからレスポンスが正常にきた時の処理を記述
     XHR.onload = () => {
       if (XHR.status != 200) {
         alert(`Error ${XHR.status}: ${XHR.statusText}`);
