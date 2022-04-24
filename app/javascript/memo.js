@@ -1,3 +1,4 @@
+// htmlを生成する
 const buildHTML = (XHR) => {
   const item = XHR.response.post;
   const html = `
@@ -44,6 +45,7 @@ function post (){
       const list = document.getElementById("list");
       const formText = document.getElementById("memo");
       list.insertAdjacentHTML("afterend", buildHTML(XHR));
+      // フォームの中身の値をリセットする
       formText.value = "";
     };
   });
